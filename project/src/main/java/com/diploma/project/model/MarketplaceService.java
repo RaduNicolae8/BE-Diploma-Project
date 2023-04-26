@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "SERVICE")
+@Table(name = "MARKETPLACE_SERVICE")
 public class MarketplaceService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +33,11 @@ public class MarketplaceService {
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
-
+    @ManyToOne
+    @JoinColumn(name = "SERVICE_TYPE_ID")
+    private ServiceType serviceType;
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
+    private MarketplaceUser user;
     
 }
