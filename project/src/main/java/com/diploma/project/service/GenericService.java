@@ -2,21 +2,19 @@ package com.diploma.project.service;
 
 import com.diploma.project.exception.CustomException;
 import com.diploma.project.mapper.GenericMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 public abstract class GenericService<T, DTO> {
 
-    private JpaRepository<T, Long> jpaRepository;
-    private GenericMapper<T, DTO> genericMapper;
+    private final JpaRepository<T, Long> jpaRepository;
+    private final GenericMapper<T, DTO> genericMapper;
 
-    public GenericService(JpaRepository<T, Long> jpaRepository, GenericMapper<T, DTO> genericMapper) {
-        this.jpaRepository = jpaRepository;
-        this.genericMapper = genericMapper;
-    }
 
     public DTO save(DTO t) {
         T entity = genericMapper.toEntity(t);
