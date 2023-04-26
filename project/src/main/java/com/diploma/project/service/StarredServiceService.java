@@ -18,7 +18,7 @@ public class StarredServiceService extends GenericService<StarredService, Starre
         super(starredServiceRepository, starredServiceMapper);
     }
 
-    StarredServiceDTO update(StarredServiceDTO starredServiceDTO){
+    public StarredServiceDTO update(StarredServiceDTO starredServiceDTO){
         log.debug("Update StarredService {}", starredServiceDTO.toString());
         StarredService starredService = getGenericMapper().toEntity(starredServiceDTO);
         Optional<StarredService> byId = getJpaRepository().findById(starredService.getId());

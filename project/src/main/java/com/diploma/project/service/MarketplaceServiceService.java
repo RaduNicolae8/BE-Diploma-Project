@@ -19,7 +19,7 @@ public class MarketplaceServiceService extends GenericService<MarketplaceService
         super(marketplaceServiceRepository, marketplaceServiceMapper);
     }
 
-    MarketplaceServiceDTO update(MarketplaceServiceDTO marketplaceServiceDTO) {
+    public MarketplaceServiceDTO update(MarketplaceServiceDTO marketplaceServiceDTO) {
         log.debug("Update MarketplaceService {}", marketplaceServiceDTO.toString());
         MarketplaceService marketplaceService = getGenericMapper().toEntity(marketplaceServiceDTO);
         Optional<MarketplaceService> byId = getJpaRepository().findById(marketplaceService.getId());

@@ -18,7 +18,7 @@ public class ServiceTypeService extends GenericService<ServiceType, ServiceTypeD
         super(serviceTypeRepository, serviceTypeMapper);
     }
 
-    ServiceTypeDTO update(ServiceTypeDTO serviceTypeDTO){
+    public ServiceTypeDTO update(ServiceTypeDTO serviceTypeDTO){
         log.debug("Update ServiceType {}", serviceTypeDTO.toString());
         ServiceType serviceType = getGenericMapper().toEntity(serviceTypeDTO);
         Optional<ServiceType> byId = getJpaRepository().findById(serviceType.getId());
