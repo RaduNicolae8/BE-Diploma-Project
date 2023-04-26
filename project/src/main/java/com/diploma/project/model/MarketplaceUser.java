@@ -33,6 +33,6 @@ public class MarketplaceUser {
     private Role role;
     @OneToMany
     @JoinColumn(name = "SERVICE_ID")
-    private List<Service> services;
+    private List<MarketplaceService> marketplaceServices;
 
 }

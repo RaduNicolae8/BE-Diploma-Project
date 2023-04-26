@@ -1,7 +1,7 @@
 package com.diploma.project.dto;
 
 import com.diploma.project.model.Role;
-import com.diploma.project.model.Service;
+import com.diploma.project.model.MarketplaceService;
 import lombok.*;
 
 import java.util.List;
@@ -20,5 +20,5 @@ public class MarketplaceUserDTO {
     private String lastName;
     private String phoneNumber;
     private Role role;
-    private List<Service> services;
+    private List<MarketplaceService> marketplaceServices;
 }

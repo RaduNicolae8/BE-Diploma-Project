@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class ServiceDTO {
+public class MarketplaceServiceDTO {
     private Long id;
     private Long price;
     private String name;

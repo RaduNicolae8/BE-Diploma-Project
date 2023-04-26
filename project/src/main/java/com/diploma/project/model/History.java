@@ -22,7 +22,7 @@ public class History {
     private Long id;
     @OneToMany
     @JoinColumn(name = "SERVICE_ID")
-    private List<Service> service;
+    private List<MarketplaceService> marketplaceService;
     @OneToOne
     @JoinColumn(name = "USER_ID")
     private MarketplaceUser marketplaceUser;

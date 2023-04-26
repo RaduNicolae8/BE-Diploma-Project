@@ -25,6 +25,6 @@ public class StarredService {
     private MarketplaceUser marketplaceUser;
     @OneToMany
     @JoinColumn(name = "SERVICE_ID")
-    private List<Service> Service;
+    private List<MarketplaceService> MarketplaceService;
 
 }

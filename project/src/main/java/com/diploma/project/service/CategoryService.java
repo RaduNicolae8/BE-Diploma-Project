@@ -20,14 +20,14 @@ public class CategoryService extends GenericService<Category, CategoryDTO>{
     }
 
     public CategoryDTO update(CategoryDTO categoryDTO) {
-        log.debug("Update function {}", categoryDTO.toString());
+        log.debug("Update Category {}", categoryDTO.toString());
         Category category = getGenericMapper().toEntity(categoryDTO);
         Optional<Category> byId = getJpaRepository().findById(category.getId());
         if (byId.isEmpty()) {
             throw new CustomException("Category with id " + category.getId() + " does not exist!", HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value());
         }
         Category save = getJpaRepository().save(category);
-        log.debug("Updated function with id {}", save.getId());
+        log.debug("Updated category with id {}", save.getId());
         return getGenericMapper().toDTO(save);
     }
 }

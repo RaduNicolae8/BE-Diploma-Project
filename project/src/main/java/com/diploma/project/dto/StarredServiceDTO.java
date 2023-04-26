@@ -1,5 +1,6 @@
 package com.diploma.project.dto;
 
+import com.diploma.project.model.MarketplaceService;
 import com.diploma.project.model.MarketplaceUser;
 import lombok.*;
 
@@ -14,5 +15,5 @@ import java.util.List;
 public class StarredServiceDTO {
     private Long id;
     private MarketplaceUser marketplaceUser;
-    private List<com.diploma.project.model.Service> Service;
+    private List<MarketplaceService> MarketplaceService;
 }
