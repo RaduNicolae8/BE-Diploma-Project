@@ -7,6 +7,7 @@ import com.diploma.project.model.MarketplaceUser;
 import com.diploma.project.repository.MarketplaceUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,4 +32,37 @@ public class MarketplaceUserService extends GenericService<MarketplaceUser, Mark
         return getGenericMapper().toDTO(save);
     }
 
+    public MarketplaceUserDTO findByUsername(String email) {
+        Optional<MarketplaceUser> byUsername= ((MarketplaceUserRepository) getJpaRepository()).findByEmail(email);
+        if (byUsername.isEmpty()){
+            throw new RuntimeException("This hospital user does not exist!");
+        }
+        return getGenericMapper().toDTO(byUsername.get());
+    }
+
+    public void updateResetPasswordToken(String token, String email) throws CustomException {
+        Optional<MarketplaceUser> byUsername = ((MarketplaceUserRepository) getJpaRepository()).findByEmail(email);
+        if (byUsername.isEmpty()) {
+            throw new CustomException("Hospital user with username " + email + " does not exist!", HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value());
+        }
+        MarketplaceUser hospitalUser = byUsername.get();
+        hospitalUser.setResetPasswordToken(token);
+        getJpaRepository().save(hospitalUser);
+    }
+
+    public MarketplaceUserDTO findByResetPasswordToken(String token) {
+        Optional<MarketplaceUser> byResetPasswordToken = ((MarketplaceUserRepository) getJpaRepository()).findByResetPasswordToken(token);
+        if (byResetPasswordToken.isEmpty()) {
+            throw new RuntimeException("This hospital user does not exist!");
+        }
+        return getGenericMapper().toDTO(byResetPasswordToken.get());
+    }
+
+    public void updatePassword(MarketplaceUserDTO marketplaceUserDTO, String newPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        MarketplaceUser marketplaceUser = getGenericMapper().toEntity(marketplaceUserDTO);
+        marketplaceUser.setPassword(passwordEncoder.encode(newPassword));
+        marketplaceUser.setResetPasswordToken(null);
+        getJpaRepository().save(marketplaceUser);
+    }
 }

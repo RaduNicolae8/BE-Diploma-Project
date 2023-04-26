@@ -28,11 +28,12 @@ public class MarketplaceUser {
     private String lastName;
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
-    @OneToOne
+    @Column(name = "RESET_PASSWORD_TOKEN")
+    private String resetPasswordToken;
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "ROLE_ID")
     private Role role;
-    @OneToMany
-    @JoinColumn(name = "SERVICE_ID")
-    private List<MarketplaceService> marketplaceServices;
+
+
 
 }
