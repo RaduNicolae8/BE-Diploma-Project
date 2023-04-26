@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 public class MarketplaceServiceDTO {
