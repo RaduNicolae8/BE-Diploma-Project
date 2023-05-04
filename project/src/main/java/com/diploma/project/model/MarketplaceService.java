@@ -30,13 +30,13 @@ public class MarketplaceService {
     private Boolean isGeneratedBySeller;
     @Column(name = "DATE_OF_CREATION")
     private Timestamp dateOfCreation;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "SERVICE_TYPE_ID")
     private ServiceType serviceType;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "USER_ID")
     private MarketplaceUser user;
     

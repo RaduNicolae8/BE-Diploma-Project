@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/marketplace-service")
+@RequestMapping("/api/marketplace-service")
 public class MarketplaceServiceController extends GenericController<MarketplaceService, MarketplaceServiceDTO> {
     public MarketplaceServiceController(MarketplaceServiceService marketplaceServiceService) {
         super(marketplaceServiceService);
