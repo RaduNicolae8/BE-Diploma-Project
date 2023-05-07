@@ -1,10 +1,12 @@
 package com.diploma.project.controller;
 
 import com.diploma.project.service.GenericService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,8 @@ public class GenericController<T,DTO> {
     private final GenericService<T,DTO> genericService;
 
     @GetMapping
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<List<DTO>> findAll() {
         List<DTO> allAdmissions = genericService.findAll();
         return ResponseEntity.ok(allAdmissions);

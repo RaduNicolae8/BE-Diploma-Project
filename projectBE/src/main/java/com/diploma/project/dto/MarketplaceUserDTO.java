@@ -27,7 +27,7 @@ public class MarketplaceUserDTO implements UserDetails {
     private String resetPasswordToken;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
         if(role.getRoleName().equalsIgnoreCase("admin"))
         {
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
