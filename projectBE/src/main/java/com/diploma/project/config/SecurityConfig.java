@@ -21,24 +21,14 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authenticationProvider;
 
-//    @Bean
-//    CorsFilter corsFilter() {
-//        return new CorsFilter();
-//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .securityContext((securityContext) -> securityContext
-                        .securityContextRepository(new DelegatingSecurityContextRepository(
-                                new RequestAttributeSecurityContextRepository(),
-                                new HttpSessionSecurityContextRepository()
-                        ))
-                )
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/public/**")
+                .requestMatchers("/api/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

@@ -18,7 +18,7 @@ public class MarketplaceUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
     @Column(name = "PASSWORD")
     private String password;

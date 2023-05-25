@@ -1,30 +1,39 @@
 package com.diploma.project.service;
 
+import com.diploma.project.dto.MarketplaceUserDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
     private static final String JWT_COOKIE = "jwtCookie";
 
+    private final MarketplaceUserService marketplaceUserService;
     @Value("${jwt.secretKey}")
     private String secretKey;
 
     @Value("${jwt.cookie-age}")
     private int cookieAge;
+
+    public MarketplaceUserDTO getAuthenticatedUser(String token){
+        String username = extractUsername(token);
+        MarketplaceUserDTO user = marketplaceUserService.findByUsername(username);
+        return user;
+    }
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -53,6 +62,10 @@ public class JwtService {
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
+        List<String> roles = new ArrayList<>();
+        Map<String, Object> rolesClaim = new HashMap<>();
+        userDetails.getAuthorities().forEach(a -> roles.add(a.getAuthority()));
+        rolesClaim.put("roles", roles);
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
@@ -60,6 +73,7 @@ public class JwtService {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // valid for 1 hour
                 .signWith(getSingInkey(), SignatureAlgorithm.HS256)
+                .addClaims(rolesClaim)
                 .compact();
     }
 

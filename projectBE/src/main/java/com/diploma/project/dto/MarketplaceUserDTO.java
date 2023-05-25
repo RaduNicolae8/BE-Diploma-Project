@@ -1,6 +1,7 @@
 package com.diploma.project.dto;
 
 import com.diploma.project.model.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,11 +20,13 @@ import java.util.List;
 public class MarketplaceUserDTO implements UserDetails {
     private Long id;
     private String email;
+    @JsonIgnore
     private String password;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private RoleDTO role;
+    @JsonIgnore
     private String resetPasswordToken;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -40,7 +43,7 @@ public class MarketplaceUserDTO implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override

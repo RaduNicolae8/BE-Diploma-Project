@@ -58,4 +58,8 @@ public class AuthenticationService {
             throw new CustomException("Bad username or password", HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value());
         }
     }
+
+    public MarketplaceUserDTO getAuthenticatedUser(String token) {
+        return jwtService.getAuthenticatedUser(token);
+    }
 }

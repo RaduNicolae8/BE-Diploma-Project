@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Marketplace@localhost" uuid="d40f690c-81bc-46d0-918a-55baca2ab956">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/Marketplace</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="Marketplace@localhost [2]" uuid="843c6448-61c3-401b-8c22-da364c88f679">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
