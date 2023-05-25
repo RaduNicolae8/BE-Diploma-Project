@@ -31,11 +31,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.login(request, response));
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<Boolean> logout(HttpServletResponse response) {
-        return ResponseEntity.ok(true);
-    }
-
     @GetMapping
     public ResponseEntity<MarketplaceUserDTO> getAuthenticatedUser(HttpServletRequest request) {
 
