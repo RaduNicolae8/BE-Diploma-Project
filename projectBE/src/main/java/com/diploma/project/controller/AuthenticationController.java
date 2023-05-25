@@ -49,7 +49,7 @@ public class AuthenticationController {
                 return ResponseEntity.ok(authenticationService.getAuthenticatedUser(token));
             }
 
-            return ResponseEntity.ok(null);
+            return ResponseEntity.notFound().build();
         }
         return null;
     }
