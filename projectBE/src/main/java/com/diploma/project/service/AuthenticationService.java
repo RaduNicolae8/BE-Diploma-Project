@@ -33,6 +33,9 @@ public class AuthenticationService {
                 request.getFirstName(),
                 request.getLastName(),
                 request.getPhoneNumber(),
+                request.getDescription(),
+                request.getImg(),
+                request.getIsSeller(),
                 roleService.findById(request.getRoleId()),
                 null
         );

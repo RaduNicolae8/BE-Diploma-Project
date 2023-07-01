@@ -5,6 +5,7 @@ import com.diploma.project.exception.CustomException;
 import com.diploma.project.mapper.MarketplaceServiceMapper;
 import com.diploma.project.model.MarketplaceService;
 import com.diploma.project.repository.MarketplaceServiceRepository;
+import com.diploma.project.security.ServiceRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,27 @@ import java.util.Optional;
 @Slf4j
 public class MarketplaceServiceService extends GenericService<MarketplaceService, MarketplaceServiceDTO> {
 
-    MarketplaceServiceService(MarketplaceServiceRepository marketplaceServiceRepository, MarketplaceServiceMapper marketplaceServiceMapper) {
+    private final CategoryService categoryService;
+    private final MarketplaceUserService marketplaceUserService;
+    MarketplaceServiceService(MarketplaceServiceRepository marketplaceServiceRepository, MarketplaceServiceMapper marketplaceServiceMapper, CategoryService categoryService, MarketplaceUserService marketplaceUserService) {
         super(marketplaceServiceRepository, marketplaceServiceMapper);
+        this.categoryService = categoryService;
+        this.marketplaceUserService = marketplaceUserService;
+    }
+
+    public MarketplaceServiceDTO saveRequest(ServiceRequest serviceRequest){
+        MarketplaceServiceDTO marketplaceServiceDTO = new MarketplaceServiceDTO(
+                null,
+                serviceRequest.getPrice(),
+                serviceRequest.getTitle(),
+                serviceRequest.getDescription(),
+                serviceRequest.getShortDescription(),
+                serviceRequest.getCoverImage(),
+                serviceRequest.getTags(),
+                categoryService.findById(serviceRequest.getCategoryId()),
+                marketplaceUserService.findById(serviceRequest.getUserId())
+                );
+        return save(marketplaceServiceDTO);
     }
 
     public MarketplaceServiceDTO update(MarketplaceServiceDTO marketplaceServiceDTO) {

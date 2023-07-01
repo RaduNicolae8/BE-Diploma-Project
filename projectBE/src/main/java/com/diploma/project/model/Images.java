@@ -1,30 +1,26 @@
 package com.diploma.project.model;
 
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.List;
-
-
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "StarredService")
-public class StarredService {
-
+@Table(name = "IMAGES")
+public class Images {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "USER_ID")
-    private MarketplaceUser marketplaceUser;
-//    @OneToMany
-//    @JoinColumn(name = "SERVICE_ID")
-//    private List<MarketplaceService> MarketplaceService;
-
+    @Column(name = "URL")
+    private String url;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "MARKETPLACE_SERVICE_ID")
+    private MarketplaceService marketplaceService;
 }

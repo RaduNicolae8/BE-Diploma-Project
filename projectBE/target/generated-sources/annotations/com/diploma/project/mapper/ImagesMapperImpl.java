@@ -1,10 +1,12 @@
 package com.diploma.project.mapper;
 
 import com.diploma.project.dto.CategoryDTO;
+import com.diploma.project.dto.ImagesDTO;
 import com.diploma.project.dto.MarketplaceServiceDTO;
 import com.diploma.project.dto.MarketplaceUserDTO;
 import com.diploma.project.dto.RoleDTO;
 import com.diploma.project.model.Category;
+import com.diploma.project.model.Images;
 import com.diploma.project.model.MarketplaceService;
 import com.diploma.project.model.MarketplaceUser;
 import com.diploma.project.model.Role;
@@ -19,73 +21,61 @@ import org.springframework.stereotype.Component;
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
 @Component
-public class MarketplaceServiceMapperImpl implements MarketplaceServiceMapper {
+public class ImagesMapperImpl implements ImagesMapper {
 
     @Override
-    public MarketplaceService toEntity(MarketplaceServiceDTO DTO) {
+    public Images toEntity(ImagesDTO DTO) {
         if ( DTO == null ) {
             return null;
         }
 
-        MarketplaceService marketplaceService = new MarketplaceService();
+        Images images = new Images();
 
-        marketplaceService.setId( DTO.getId() );
-        marketplaceService.setPrice( DTO.getPrice() );
-        marketplaceService.setTitle( DTO.getTitle() );
-        marketplaceService.setDescription( DTO.getDescription() );
-        marketplaceService.setShortDescription( DTO.getShortDescription() );
-        marketplaceService.setCoverImage( DTO.getCoverImage() );
-        marketplaceService.setTags( DTO.getTags() );
-        marketplaceService.setCategory( categoryDTOToCategory( DTO.getCategory() ) );
-        marketplaceService.setUser( marketplaceUserDTOToMarketplaceUser( DTO.getUser() ) );
+        images.setId( DTO.getId() );
+        images.setUrl( DTO.getUrl() );
+        images.setMarketplaceService( marketplaceServiceDTOToMarketplaceService( DTO.getMarketplaceService() ) );
 
-        return marketplaceService;
+        return images;
     }
 
     @Override
-    public MarketplaceServiceDTO toDTO(MarketplaceService entity) {
+    public ImagesDTO toDTO(Images entity) {
         if ( entity == null ) {
             return null;
         }
 
-        MarketplaceServiceDTO marketplaceServiceDTO = new MarketplaceServiceDTO();
+        ImagesDTO imagesDTO = new ImagesDTO();
 
-        marketplaceServiceDTO.setId( entity.getId() );
-        marketplaceServiceDTO.setPrice( entity.getPrice() );
-        marketplaceServiceDTO.setTitle( entity.getTitle() );
-        marketplaceServiceDTO.setDescription( entity.getDescription() );
-        marketplaceServiceDTO.setShortDescription( entity.getShortDescription() );
-        marketplaceServiceDTO.setCoverImage( entity.getCoverImage() );
-        marketplaceServiceDTO.setTags( entity.getTags() );
-        marketplaceServiceDTO.setCategory( categoryToCategoryDTO( entity.getCategory() ) );
-        marketplaceServiceDTO.setUser( marketplaceUserToMarketplaceUserDTO( entity.getUser() ) );
+        imagesDTO.setId( entity.getId() );
+        imagesDTO.setMarketplaceService( marketplaceServiceToMarketplaceServiceDTO( entity.getMarketplaceService() ) );
+        imagesDTO.setUrl( entity.getUrl() );
 
-        return marketplaceServiceDTO;
+        return imagesDTO;
     }
 
     @Override
-    public List<MarketplaceService> toEntity(List<MarketplaceServiceDTO> DTOs) {
+    public List<Images> toEntity(List<ImagesDTO> DTOs) {
         if ( DTOs == null ) {
             return null;
         }
 
-        List<MarketplaceService> list = new ArrayList<MarketplaceService>( DTOs.size() );
-        for ( MarketplaceServiceDTO marketplaceServiceDTO : DTOs ) {
-            list.add( toEntity( marketplaceServiceDTO ) );
+        List<Images> list = new ArrayList<Images>( DTOs.size() );
+        for ( ImagesDTO imagesDTO : DTOs ) {
+            list.add( toEntity( imagesDTO ) );
         }
 
         return list;
     }
 
     @Override
-    public List<MarketplaceServiceDTO> toDTO(List<MarketplaceService> entities) {
+    public List<ImagesDTO> toDTO(List<Images> entities) {
         if ( entities == null ) {
             return null;
         }
 
-        List<MarketplaceServiceDTO> list = new ArrayList<MarketplaceServiceDTO>( entities.size() );
-        for ( MarketplaceService marketplaceService : entities ) {
-            list.add( toDTO( marketplaceService ) );
+        List<ImagesDTO> list = new ArrayList<ImagesDTO>( entities.size() );
+        for ( Images images : entities ) {
+            list.add( toDTO( images ) );
         }
 
         return list;
@@ -140,6 +130,26 @@ public class MarketplaceServiceMapperImpl implements MarketplaceServiceMapper {
         return marketplaceUser;
     }
 
+    protected MarketplaceService marketplaceServiceDTOToMarketplaceService(MarketplaceServiceDTO marketplaceServiceDTO) {
+        if ( marketplaceServiceDTO == null ) {
+            return null;
+        }
+
+        MarketplaceService marketplaceService = new MarketplaceService();
+
+        marketplaceService.setId( marketplaceServiceDTO.getId() );
+        marketplaceService.setPrice( marketplaceServiceDTO.getPrice() );
+        marketplaceService.setTitle( marketplaceServiceDTO.getTitle() );
+        marketplaceService.setDescription( marketplaceServiceDTO.getDescription() );
+        marketplaceService.setShortDescription( marketplaceServiceDTO.getShortDescription() );
+        marketplaceService.setCoverImage( marketplaceServiceDTO.getCoverImage() );
+        marketplaceService.setTags( marketplaceServiceDTO.getTags() );
+        marketplaceService.setCategory( categoryDTOToCategory( marketplaceServiceDTO.getCategory() ) );
+        marketplaceService.setUser( marketplaceUserDTOToMarketplaceUser( marketplaceServiceDTO.getUser() ) );
+
+        return marketplaceService;
+    }
+
     protected CategoryDTO categoryToCategoryDTO(Category category) {
         if ( category == null ) {
             return null;
@@ -187,5 +197,25 @@ public class MarketplaceServiceMapperImpl implements MarketplaceServiceMapper {
         marketplaceUserDTO.setResetPasswordToken( marketplaceUser.getResetPasswordToken() );
 
         return marketplaceUserDTO;
+    }
+
+    protected MarketplaceServiceDTO marketplaceServiceToMarketplaceServiceDTO(MarketplaceService marketplaceService) {
+        if ( marketplaceService == null ) {
+            return null;
+        }
+
+        MarketplaceServiceDTO marketplaceServiceDTO = new MarketplaceServiceDTO();
+
+        marketplaceServiceDTO.setId( marketplaceService.getId() );
+        marketplaceServiceDTO.setPrice( marketplaceService.getPrice() );
+        marketplaceServiceDTO.setTitle( marketplaceService.getTitle() );
+        marketplaceServiceDTO.setDescription( marketplaceService.getDescription() );
+        marketplaceServiceDTO.setShortDescription( marketplaceService.getShortDescription() );
+        marketplaceServiceDTO.setCoverImage( marketplaceService.getCoverImage() );
+        marketplaceServiceDTO.setTags( marketplaceService.getTags() );
+        marketplaceServiceDTO.setCategory( categoryToCategoryDTO( marketplaceService.getCategory() ) );
+        marketplaceServiceDTO.setUser( marketplaceUserToMarketplaceUserDTO( marketplaceService.getUser() ) );
+
+        return marketplaceServiceDTO;
     }
 }

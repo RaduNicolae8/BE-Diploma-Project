@@ -15,5 +15,5 @@ import java.util.List;
 public class StarredServiceDTO {
     private Long id;
     private MarketplaceUser marketplaceUser;
-    private List<MarketplaceService> MarketplaceService;
+//    private List<MarketplaceService> MarketplaceService;
 }

@@ -25,6 +25,9 @@ public class MarketplaceUserDTO implements UserDetails {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private String description;
+    private String img;
+    private Boolean isSeller;
     private RoleDTO role;
     @JsonIgnore
     private String resetPasswordToken;

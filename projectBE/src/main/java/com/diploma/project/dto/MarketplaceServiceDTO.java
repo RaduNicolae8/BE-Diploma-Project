@@ -18,11 +18,11 @@ import java.sql.Timestamp;
 public class MarketplaceServiceDTO {
     private Long id;
     private Long price;
-    private String name;
+    private String title;
     private String description;
-    private Boolean isGeneratedBySeller;
-    private Timestamp dateOfCreation;
-    private Category category;
-    private ServiceType serviceType;
-    private MarketplaceUser user;
+    private String shortDescription;
+    private String coverImage;
+    private String tags;
+    private CategoryDTO category;
+    private MarketplaceUserDTO user;
 }

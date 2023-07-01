@@ -25,6 +25,12 @@ public class GenericController<T,DTO> {
         return ResponseEntity.ok(allAdmissions);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DTO> findById(@PathVariable Long id) {
+        DTO dto = genericService.findById(id);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping
     public ResponseEntity<DTO> save(@RequestBody DTO dto) {
         DTO savedDTO = genericService.save(dto);

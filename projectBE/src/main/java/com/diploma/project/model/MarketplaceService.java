@@ -22,20 +22,22 @@ public class MarketplaceService {
     private Long id;
     @Column(name = "PRICE")
     private Long price;
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "TITLE")
+    private String title;
     @Column(name = "DESCRIPTION")
     private String description;
-    @Column(name="IS_GENERATED_BY_SELLER")
-    private Boolean isGeneratedBySeller;
-    @Column(name = "DATE_OF_CREATION")
-    private Timestamp dateOfCreation;
+    @Column(name = "SHORT_DESCRIPTION")
+    private String shortDescription;
+    @Column(name = "COVER_IMAGE")
+    private String coverImage;
+    @Column(name = "TAGS")
+    private String tags;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "SERVICE_TYPE_ID")
-    private ServiceType serviceType;
+//    @ManyToOne(cascade = CascadeType.MERGE)
+//    @JoinColumn(name = "SERVICE_TYPE_ID")
+//    private ServiceType serviceType;
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "USER_ID")
     private MarketplaceUser user;

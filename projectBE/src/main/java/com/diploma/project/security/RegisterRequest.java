@@ -15,6 +15,9 @@ public class RegisterRequest {
     private String firstName;
     private String lastName;
     private String phoneNumber;
+    private String description;
+    private String img;
+    private Boolean isSeller;
     private Long roleId;
 
 }

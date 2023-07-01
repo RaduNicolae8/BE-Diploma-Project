@@ -1,7 +1,6 @@
 package com.diploma.project.mapper;
 
 import com.diploma.project.dto.StarredServiceDTO;
-import com.diploma.project.model.MarketplaceService;
 import com.diploma.project.model.StarredService;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-25T21:46:06+0300",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
+    date = "2023-07-01T23:57:29+0300",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
 )
 @Component
 public class StarredServiceMapperImpl implements StarredServiceMapper {
@@ -26,10 +25,6 @@ public class StarredServiceMapperImpl implements StarredServiceMapper {
 
         starredService.setId( DTO.getId() );
         starredService.setMarketplaceUser( DTO.getMarketplaceUser() );
-        List<MarketplaceService> list = DTO.getMarketplaceService();
-        if ( list != null ) {
-            starredService.setMarketplaceService( new ArrayList<MarketplaceService>( list ) );
-        }
 
         return starredService;
     }
@@ -44,10 +39,6 @@ public class StarredServiceMapperImpl implements StarredServiceMapper {
 
         starredServiceDTO.setId( entity.getId() );
         starredServiceDTO.setMarketplaceUser( entity.getMarketplaceUser() );
-        List<MarketplaceService> list = entity.getMarketplaceService();
-        if ( list != null ) {
-            starredServiceDTO.setMarketplaceService( new ArrayList<MarketplaceService>( list ) );
-        }
 
         return starredServiceDTO;
     }
