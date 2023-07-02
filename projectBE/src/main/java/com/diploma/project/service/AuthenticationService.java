@@ -32,6 +32,7 @@ public class AuthenticationService {
                 passwordEncoder.encode(request.getPassword()),
                 request.getFirstName(),
                 request.getLastName(),
+                request.getCountry(),
                 request.getPhoneNumber(),
                 request.getDescription(),
                 request.getImg(),

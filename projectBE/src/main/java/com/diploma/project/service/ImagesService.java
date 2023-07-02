@@ -8,6 +8,8 @@ import com.diploma.project.security.ImagesRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class ImagesService extends GenericService<Images, ImagesDTO>{
@@ -26,6 +28,10 @@ public class ImagesService extends GenericService<Images, ImagesDTO>{
                 );
         System.out.println( marketplaceServiceService.findById(imagesRequest.getServiceId()));
         return save(imagesDTO);
+    }
+
+    public List<ImagesDTO> findImagesByMarketplaceService_Id(Long id){
+        return ((ImagesMapper) getGenericMapper()).toDTO(((ImagesRepository) getJpaRepository()).findImagesByMarketplaceService_Id(id));
     }
 
 

@@ -32,6 +32,8 @@ public class MarketplaceUser {
     private String img;
     @Column(name = "IS_SELLER")
     private Boolean isSeller;
+    @Column(name = "COUNTRY")
+    private String country;
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
     @Column(name = "RESET_PASSWORD_TOKEN")
