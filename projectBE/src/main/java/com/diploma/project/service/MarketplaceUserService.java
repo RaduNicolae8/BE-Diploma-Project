@@ -66,7 +66,4 @@ public class MarketplaceUserService extends GenericService<MarketplaceUser, Mark
         getJpaRepository().save(marketplaceUser);
     }
 
-//    public MarketplaceUserDTO getAuthenticatedUser() {
-//
-//    }
 }

@@ -38,7 +38,8 @@ public class AuthenticationService {
                 request.getImg(),
                 request.getIsSeller(),
                 roleService.findById(request.getRoleId()),
-                null
+                null,
+                request.getLanguages()
         );
         marketplaceUserService.save(marketplaceUserDTO);
         return true;

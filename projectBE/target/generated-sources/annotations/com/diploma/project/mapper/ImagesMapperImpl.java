@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-01T23:57:29+0300",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
+    date = "2023-07-03T18:24:03+0300",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
 )
 @Component
 public class ImagesMapperImpl implements ImagesMapper {
@@ -123,9 +123,11 @@ public class ImagesMapperImpl implements ImagesMapper {
         marketplaceUser.setDescription( marketplaceUserDTO.getDescription() );
         marketplaceUser.setImg( marketplaceUserDTO.getImg() );
         marketplaceUser.setIsSeller( marketplaceUserDTO.getIsSeller() );
+        marketplaceUser.setCountry( marketplaceUserDTO.getCountry() );
         marketplaceUser.setPhoneNumber( marketplaceUserDTO.getPhoneNumber() );
         marketplaceUser.setResetPasswordToken( marketplaceUserDTO.getResetPasswordToken() );
         marketplaceUser.setRole( roleDTOToRole( marketplaceUserDTO.getRole() ) );
+        marketplaceUser.setLanguages( marketplaceUserDTO.getLanguages() );
 
         return marketplaceUser;
     }
@@ -146,6 +148,7 @@ public class ImagesMapperImpl implements ImagesMapper {
         marketplaceService.setTags( marketplaceServiceDTO.getTags() );
         marketplaceService.setCategory( categoryDTOToCategory( marketplaceServiceDTO.getCategory() ) );
         marketplaceService.setUser( marketplaceUserDTOToMarketplaceUser( marketplaceServiceDTO.getUser() ) );
+        marketplaceService.setIsRequest( marketplaceServiceDTO.getIsRequest() );
 
         return marketplaceService;
     }
@@ -189,12 +192,14 @@ public class ImagesMapperImpl implements ImagesMapper {
         marketplaceUserDTO.setPassword( marketplaceUser.getPassword() );
         marketplaceUserDTO.setFirstName( marketplaceUser.getFirstName() );
         marketplaceUserDTO.setLastName( marketplaceUser.getLastName() );
+        marketplaceUserDTO.setCountry( marketplaceUser.getCountry() );
         marketplaceUserDTO.setPhoneNumber( marketplaceUser.getPhoneNumber() );
         marketplaceUserDTO.setDescription( marketplaceUser.getDescription() );
         marketplaceUserDTO.setImg( marketplaceUser.getImg() );
         marketplaceUserDTO.setIsSeller( marketplaceUser.getIsSeller() );
         marketplaceUserDTO.setRole( roleToRoleDTO( marketplaceUser.getRole() ) );
         marketplaceUserDTO.setResetPasswordToken( marketplaceUser.getResetPasswordToken() );
+        marketplaceUserDTO.setLanguages( marketplaceUser.getLanguages() );
 
         return marketplaceUserDTO;
     }
@@ -215,6 +220,7 @@ public class ImagesMapperImpl implements ImagesMapper {
         marketplaceServiceDTO.setTags( marketplaceService.getTags() );
         marketplaceServiceDTO.setCategory( categoryToCategoryDTO( marketplaceService.getCategory() ) );
         marketplaceServiceDTO.setUser( marketplaceUserToMarketplaceUserDTO( marketplaceService.getUser() ) );
+        marketplaceServiceDTO.setIsRequest( marketplaceService.getIsRequest() );
 
         return marketplaceServiceDTO;
     }

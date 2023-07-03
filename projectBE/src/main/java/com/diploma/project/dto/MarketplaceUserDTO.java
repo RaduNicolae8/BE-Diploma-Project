@@ -32,6 +32,7 @@ public class MarketplaceUserDTO implements UserDetails {
     private RoleDTO role;
     @JsonIgnore
     private String resetPasswordToken;
+    private String languages;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

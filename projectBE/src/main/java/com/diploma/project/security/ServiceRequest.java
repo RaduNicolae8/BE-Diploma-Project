@@ -19,4 +19,5 @@ public class ServiceRequest {
     private String tags;
     private Long categoryId;
     private Long userId;
+    private Boolean isRequest;
 }

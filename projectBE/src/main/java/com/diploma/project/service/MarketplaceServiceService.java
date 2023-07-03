@@ -34,7 +34,8 @@ public class MarketplaceServiceService extends GenericService<MarketplaceService
                 serviceRequest.getCoverImage(),
                 serviceRequest.getTags(),
                 categoryService.findById(serviceRequest.getCategoryId()),
-                marketplaceUserService.findById(serviceRequest.getUserId())
+                marketplaceUserService.findById(serviceRequest.getUserId()),
+                serviceRequest.getIsRequest()
                 );
         return save(marketplaceServiceDTO);
     }

@@ -41,8 +41,6 @@ public class MarketplaceService {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "USER_ID")
     private MarketplaceUser user;
-
-    //TO-DO
-//    isRequested ?
-
+    @Column(name = "IS_REQUEST")
+    private Boolean isRequest;
 }

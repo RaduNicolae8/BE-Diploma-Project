@@ -49,7 +49,7 @@ public class ForgotPasswordService {
         MimeMessageHelper helper = new MimeMessageHelper(message);
         String name = marketplaceUserService.findByUsername(recipientEmail).getFirstName();
 
-        helper.setFrom("ServiceMarketplace.helpdesk@gmail.com", "Service Marketplace Support");
+        helper.setFrom("EasyService.helpdesk@gmail.com", "EasyService Marketplace Support");
         helper.setTo(recipientEmail);
         String subject = "Here's the link to reset your password";
         String content = "<p>Hello " + name + ",</p>"

@@ -18,8 +18,6 @@ public class GenericController<T,DTO> {
     private final GenericService<T,DTO> genericService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-//    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<List<DTO>> findAll() {
         List<DTO> allAdmissions = genericService.findAll();
         return ResponseEntity.ok(allAdmissions);

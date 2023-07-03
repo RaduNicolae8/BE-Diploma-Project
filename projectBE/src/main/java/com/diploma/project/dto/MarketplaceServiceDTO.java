@@ -25,4 +25,5 @@ public class MarketplaceServiceDTO {
     private String tags;
     private CategoryDTO category;
     private MarketplaceUserDTO user;
+    private Boolean isRequest;
 }

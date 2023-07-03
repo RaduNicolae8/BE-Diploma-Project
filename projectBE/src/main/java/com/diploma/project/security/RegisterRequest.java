@@ -20,5 +20,6 @@ public class RegisterRequest {
     private String img;
     private Boolean isSeller;
     private Long roleId;
+    private String languages;
 
 }

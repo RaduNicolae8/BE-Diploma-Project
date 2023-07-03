@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface MarketplaceUserRepository extends JpaRepository<MarketplaceUser, Long> {
     Optional<MarketplaceUser> findByEmail(String email);
     Optional<MarketplaceUser> findByResetPasswordToken(String resetPasswordToken);
+
 }

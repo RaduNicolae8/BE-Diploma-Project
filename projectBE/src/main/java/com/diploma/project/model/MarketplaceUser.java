@@ -41,6 +41,8 @@ public class MarketplaceUser {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "ROLE_ID")
     private Role role;
+    @Column(name= "LANGUAGES")
+    private String languages;
 
 
 

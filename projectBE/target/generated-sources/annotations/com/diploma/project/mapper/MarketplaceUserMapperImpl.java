@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-01T23:57:29+0300",
-    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.2 (Oracle Corporation)"
+    date = "2023-07-03T18:24:03+0300",
+    comments = "version: 1.5.3.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
 )
 @Component
 public class MarketplaceUserMapperImpl implements MarketplaceUserMapper {
@@ -33,9 +33,11 @@ public class MarketplaceUserMapperImpl implements MarketplaceUserMapper {
         marketplaceUser.setDescription( DTO.getDescription() );
         marketplaceUser.setImg( DTO.getImg() );
         marketplaceUser.setIsSeller( DTO.getIsSeller() );
+        marketplaceUser.setCountry( DTO.getCountry() );
         marketplaceUser.setPhoneNumber( DTO.getPhoneNumber() );
         marketplaceUser.setResetPasswordToken( DTO.getResetPasswordToken() );
         marketplaceUser.setRole( roleDTOToRole( DTO.getRole() ) );
+        marketplaceUser.setLanguages( DTO.getLanguages() );
 
         return marketplaceUser;
     }
@@ -53,12 +55,14 @@ public class MarketplaceUserMapperImpl implements MarketplaceUserMapper {
         marketplaceUserDTO.setPassword( entity.getPassword() );
         marketplaceUserDTO.setFirstName( entity.getFirstName() );
         marketplaceUserDTO.setLastName( entity.getLastName() );
+        marketplaceUserDTO.setCountry( entity.getCountry() );
         marketplaceUserDTO.setPhoneNumber( entity.getPhoneNumber() );
         marketplaceUserDTO.setDescription( entity.getDescription() );
         marketplaceUserDTO.setImg( entity.getImg() );
         marketplaceUserDTO.setIsSeller( entity.getIsSeller() );
         marketplaceUserDTO.setRole( roleToRoleDTO( entity.getRole() ) );
         marketplaceUserDTO.setResetPasswordToken( entity.getResetPasswordToken() );
+        marketplaceUserDTO.setLanguages( entity.getLanguages() );
 
         return marketplaceUserDTO;
     }
