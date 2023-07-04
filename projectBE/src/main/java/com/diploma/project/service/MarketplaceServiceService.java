@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,5 +52,25 @@ public class MarketplaceServiceService extends GenericService<MarketplaceService
         MarketplaceService save = getJpaRepository().save(marketplaceService);
         log.debug("Updated marketplaceService with id {}", save.getId());
         return getGenericMapper().toDTO(save);
+    }
+
+    public List<MarketplaceServiceDTO> getOrderAndSortByCategory(int min, int max, String sort, Long categoryId ){
+        List<MarketplaceServiceDTO> list =  getGenericMapper().toDTO( ((MarketplaceServiceRepository) getJpaRepository()).findMarketplaceServicesByCategoryId(categoryId));
+        List<MarketplaceServiceDTO> newList = new ArrayList<>();
+        for (MarketplaceServiceDTO marketplaceServiceDTO : list) {
+            if (marketplaceServiceDTO.getPrice() >= min && marketplaceServiceDTO.getPrice() <= max) {
+                newList.add(marketplaceServiceDTO);
+            }
+        }
+        if (sort.equalsIgnoreCase("cheapest")){
+            newList.sort((o1, o2) -> (int) (o1.getPrice() - o2.getPrice()));
+        } else if (sort.equalsIgnoreCase("expensive")){
+            newList.sort((o1, o2) -> (int) (o2.getPrice() - o1.getPrice()));
+        } else if (sort.equalsIgnoreCase("newest")){
+            newList.sort((o1, o2) -> (int) (o2.getId() - o1.getId()));
+        } else if (sort.equalsIgnoreCase("oldest")){
+            newList.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
+        }
+        return newList;
     }
 }

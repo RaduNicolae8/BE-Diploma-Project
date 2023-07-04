@@ -7,6 +7,8 @@ import com.diploma.project.service.MarketplaceServiceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/service")
 public class MarketplaceServiceController extends GenericController<MarketplaceService, MarketplaceServiceDTO> {
@@ -23,6 +25,12 @@ public class MarketplaceServiceController extends GenericController<MarketplaceS
     public ResponseEntity<MarketplaceServiceDTO> update(@RequestBody MarketplaceServiceDTO marketplaceServiceDTO){
         MarketplaceServiceDTO updatedMarketplaceService = ((MarketplaceServiceService) getGenericService()).update(marketplaceServiceDTO);
         return ResponseEntity.ok(updatedMarketplaceService);
+    }
+
+    @GetMapping("/get/sorted")
+    public ResponseEntity<List<MarketplaceServiceDTO>> getSorted(@RequestParam Long categoryId, @RequestParam String sort, @RequestParam int min, @RequestParam int max){
+        List<MarketplaceServiceDTO> sortedMarketplaceServices = ((MarketplaceServiceService) getGenericService()).getOrderAndSortByCategory(min,max,sort,categoryId);
+        return ResponseEntity.ok(sortedMarketplaceServices);
     }
 
 }

@@ -24,7 +24,7 @@ public class MarketplaceService {
     private Long price;
     @Column(name = "TITLE")
     private String title;
-    @Column(name = "DESCRIPTION")
+    @Column(name = "DESCRIPTION",length = 10000)
     private String description;
     @Column(name = "SHORT_DESCRIPTION")
     private String shortDescription;
