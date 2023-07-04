@@ -20,11 +20,11 @@ public class StarredService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "USER_ID")
     private MarketplaceUser marketplaceUser;
-//    @OneToMany
-//    @JoinColumn(name = "SERVICE_ID")
-//    private List<MarketplaceService> MarketplaceService;
+    @OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "SERVICE_ID")
+    private MarketplaceService marketplaceService;
 
 }

@@ -1,5 +1,6 @@
 package com.diploma.project.dto;
 
+import com.diploma.project.model.MarketplaceService;
 import com.diploma.project.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -33,6 +34,8 @@ public class MarketplaceUserDTO implements UserDetails {
     @JsonIgnore
     private String resetPasswordToken;
     private String languages;
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

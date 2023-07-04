@@ -38,4 +38,10 @@ public class MarketplaceServiceController extends GenericController<MarketplaceS
         List<MarketplaceServiceDTO> marketplaceServices = ((MarketplaceServiceService) getGenericService()).getMarketplaceServiceByUserId(userId);
         return ResponseEntity.ok(marketplaceServices);
     }
+
+    @GetMapping("/get/search")
+    public ResponseEntity<List<MarketplaceServiceDTO>> getBySearch(@RequestParam String search, @RequestParam String sort, @RequestParam int min, @RequestParam int max){
+        List<MarketplaceServiceDTO> marketplaceServices = ((MarketplaceServiceService) getGenericService()).search(search,min,max,sort);
+        return ResponseEntity.ok(marketplaceServices);
+    }
 }

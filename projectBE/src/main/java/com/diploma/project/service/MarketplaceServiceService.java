@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -76,5 +77,25 @@ public class MarketplaceServiceService extends GenericService<MarketplaceService
 
     public List<MarketplaceServiceDTO> getMarketplaceServiceByUserId(Long userId){
         return getGenericMapper().toDTO( ((MarketplaceServiceRepository) getJpaRepository()).findMarketplaceServiceByUserId(userId));
+    }
+
+    public List<MarketplaceServiceDTO> search(String search, int min, int max, String sort){
+        List<MarketplaceServiceDTO> list = getGenericMapper().toDTO( ((MarketplaceServiceRepository) getJpaRepository()).search(search));
+        List<MarketplaceServiceDTO> newList = new ArrayList<>();
+        for (MarketplaceServiceDTO marketplaceServiceDTO : list) {
+            if (marketplaceServiceDTO.getPrice() >= min && marketplaceServiceDTO.getPrice() <= max) {
+                newList.add(marketplaceServiceDTO);
+            }
+        }
+        if (sort.equalsIgnoreCase("cheapest")){
+            newList.sort((o1, o2) -> (int) (o1.getPrice() - o2.getPrice()));
+        } else if (sort.equalsIgnoreCase("expensive")){
+            newList.sort((o1, o2) -> (int) (o2.getPrice() - o1.getPrice()));
+        } else if (sort.equalsIgnoreCase("newest")){
+            newList.sort((o1, o2) -> (int) (o2.getId() - o1.getId()));
+        } else if (sort.equalsIgnoreCase("oldest")){
+            newList.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
+        }
+        return newList;
     }
 }

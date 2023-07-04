@@ -14,6 +14,6 @@ import java.util.List;
 @EqualsAndHashCode
 public class StarredServiceDTO {
     private Long id;
-    private MarketplaceUser marketplaceUser;
-//    private List<MarketplaceService> MarketplaceService;
+    private MarketplaceUserDTO marketplaceUser;
+    private MarketplaceServiceDTO MarketplaceService;
 }

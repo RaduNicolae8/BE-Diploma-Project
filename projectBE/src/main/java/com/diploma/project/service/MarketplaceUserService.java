@@ -1,8 +1,10 @@
 package com.diploma.project.service;
 
+import com.diploma.project.dto.MarketplaceServiceDTO;
 import com.diploma.project.dto.MarketplaceUserDTO;
 import com.diploma.project.exception.CustomException;
 import com.diploma.project.mapper.MarketplaceUserMapper;
+import com.diploma.project.model.MarketplaceService;
 import com.diploma.project.model.MarketplaceUser;
 import com.diploma.project.repository.MarketplaceUserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +38,7 @@ public class MarketplaceUserService extends GenericService<MarketplaceUser, Mark
     public MarketplaceUserDTO findByUsername(String email) {
         Optional<MarketplaceUser> byUsername= ((MarketplaceUserRepository) getJpaRepository()).findByEmail(email);
         if (byUsername.isEmpty()){
-            throw new RuntimeException("This hospital user does not exist!");
+            throw new RuntimeException("This EasyService user does not exist!");
         }
         return getGenericMapper().toDTO(byUsername.get());
     }
@@ -43,7 +46,7 @@ public class MarketplaceUserService extends GenericService<MarketplaceUser, Mark
     public void updateResetPasswordToken(String token, String email) throws CustomException {
         Optional<MarketplaceUser> byUsername = ((MarketplaceUserRepository) getJpaRepository()).findByEmail(email);
         if (byUsername.isEmpty()) {
-            throw new CustomException("Hospital user with username " + email + " does not exist!", HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value());
+            throw new CustomException("EasyService user with username " + email + " does not exist!", HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value());
         }
         MarketplaceUser hospitalUser = byUsername.get();
         hospitalUser.setResetPasswordToken(token);
@@ -53,7 +56,7 @@ public class MarketplaceUserService extends GenericService<MarketplaceUser, Mark
     public MarketplaceUserDTO findByResetPasswordToken(String token) {
         Optional<MarketplaceUser> byResetPasswordToken = ((MarketplaceUserRepository) getJpaRepository()).findByResetPasswordToken(token);
         if (byResetPasswordToken.isEmpty()) {
-            throw new RuntimeException("This hospital user does not exist!");
+            throw new RuntimeException("This EasyService user does not exist!");
         }
         return getGenericMapper().toDTO(byResetPasswordToken.get());
     }
