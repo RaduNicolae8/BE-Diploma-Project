@@ -32,13 +32,10 @@ public class MarketplaceService {
     private String coverImage;
     @Column(name = "TAGS")
     private String tags;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
-//    @ManyToOne(cascade = CascadeType.MERGE)
-//    @JoinColumn(name = "SERVICE_TYPE_ID")
-//    private ServiceType serviceType;
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "USER_ID")
     private MarketplaceUser user;
     @Column(name = "IS_REQUEST")

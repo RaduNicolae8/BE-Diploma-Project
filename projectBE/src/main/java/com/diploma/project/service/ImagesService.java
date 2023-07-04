@@ -34,5 +34,8 @@ public class ImagesService extends GenericService<Images, ImagesDTO>{
         return ((ImagesMapper) getGenericMapper()).toDTO(((ImagesRepository) getJpaRepository()).findImagesByMarketplaceService_Id(id));
     }
 
+    public List<ImagesDTO> deleteAllByMarketplaceServiceId(Long id){
+        return ((ImagesMapper) getGenericMapper()).toDTO(((ImagesRepository) getJpaRepository()).deleteAllByMarketplaceServiceId(id));
+    }
 
 }

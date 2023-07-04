@@ -2,6 +2,7 @@ package com.diploma.project.model;
 
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Entity
+@Transactional
 @Table(name = "IMAGES")
 public class Images {
     @Id
@@ -20,7 +22,7 @@ public class Images {
     private Long id;
     @Column(name = "URL")
     private String url;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "MARKETPLACE_SERVICE_ID")
     private MarketplaceService marketplaceService;
 }

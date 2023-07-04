@@ -9,4 +9,5 @@ import java.util.List;
 public interface MarketplaceServiceRepository extends JpaRepository<MarketplaceService, Long> {
 
     List<MarketplaceService> findMarketplaceServicesByCategoryId(Long categoryId);
+    List<MarketplaceService> findMarketplaceServiceByUserId(Long userId);
 }

@@ -24,4 +24,9 @@ public class ImagesController extends GenericController<Images, ImagesDTO>{
     public List<ImagesDTO> findImagesByMarketplaceService_Id(@RequestParam Long id){
         return ((ImagesService) getGenericService()).findImagesByMarketplaceService_Id(id);
     }
+
+    @DeleteMapping("/delete")
+    public List<ImagesDTO> deleteAllByMarketplaceServiceId(@RequestParam Long id){
+        return ((ImagesService) getGenericService()).deleteAllByMarketplaceServiceId(id);
+    }
 }

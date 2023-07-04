@@ -73,4 +73,8 @@ public class MarketplaceServiceService extends GenericService<MarketplaceService
         }
         return newList;
     }
+
+    public List<MarketplaceServiceDTO> getMarketplaceServiceByUserId(Long userId){
+        return getGenericMapper().toDTO( ((MarketplaceServiceRepository) getJpaRepository()).findMarketplaceServiceByUserId(userId));
+    }
 }
