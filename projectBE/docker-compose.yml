@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: EasyService-postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: EasyService
+      POSTGRES_USER: EasyServiceAdmin
+      POSTGRES_PASSWORD: EasyServiceAdmin
+    ports:
+      - "5433:5432"
