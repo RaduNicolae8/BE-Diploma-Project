@@ -1,5 +1,6 @@
 package com.diploma.project.controller;
 
+import com.diploma.project.auth.AuthRemoteService;
 import com.diploma.project.dto.MarketplaceUserDTO;
 import com.diploma.project.exception.CustomException;
 import com.diploma.project.security.AuthenticationRequest;
@@ -20,15 +21,20 @@ import jakarta.servlet.http.Cookie;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
+    private final AuthRemoteService authRemoteService;
 
     @PostMapping("/register")
     public ResponseEntity<Boolean> register(@RequestBody RegisterRequest request) {
-        return ResponseEntity.ok(authenticationService.register(request));
+        return ResponseEntity.ok(authRemoteService.register(request));
     }
 
     @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody AuthenticationRequest request, HttpServletResponse response) throws CustomException {
-        return ResponseEntity.ok(authenticationService.login(request, response));
+        Cookie cookie = authRemoteService.login(request);
+
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok(true);
     }
 
     @GetMapping
@@ -41,7 +47,7 @@ public class AuthenticationController {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("jwtCookie")) {
                 String token = cookie.getValue();
-                return ResponseEntity.ok(authenticationService.getAuthenticatedUser(token));
+                return ResponseEntity.ok(authRemoteService.getUserFromCookie(token));
             }
 
             return ResponseEntity.notFound().build();

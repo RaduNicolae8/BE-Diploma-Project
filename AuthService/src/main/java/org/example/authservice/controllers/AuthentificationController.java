@@ -4,6 +4,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.example.authservice.dtos.GetUserDto;
 import org.example.authservice.dtos.MarketplaceUserDTO;
 import org.example.authservice.security.AuthenticationRequest;
 import org.example.authservice.security.RegisterRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*")
 //@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class AuthentificationController {
@@ -38,20 +40,7 @@ public class AuthentificationController {
     }
 
     @GetMapping
-    public ResponseEntity<MarketplaceUserDTO> getAuthenticatedUser(HttpServletRequest request) {
-
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            return ResponseEntity.notFound().build();
-        }
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("jwtCookie")) {
-                String token = cookie.getValue();
-                return ResponseEntity.ok(authenticationService.getAuthenticatedUser(token));
-            }
-
-            return ResponseEntity.notFound().build();
-        }
-        return null;
+    public ResponseEntity<MarketplaceUserDTO> getAuthenticatedUser( @RequestHeader("jwtCookie") String jwtCookie) {
+        return ResponseEntity.ok(authenticationService.getAuthenticatedUser(jwtCookie));
     }
 }
