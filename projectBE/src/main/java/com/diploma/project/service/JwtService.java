@@ -54,6 +54,15 @@ public class JwtService {
         return jwtCookie;
     }
 
+    public Cookie generateJwtCookie(String jwtToken) {
+        Cookie jwtCookie = new Cookie(JWT_COOKIE, jwtToken);
+        jwtCookie.setDomain("localhost");
+        jwtCookie.setPath("/");
+        jwtCookie.setMaxAge(cookieAge);
+        jwtCookie.setHttpOnly(true);
+        return jwtCookie;
+    }
+
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
