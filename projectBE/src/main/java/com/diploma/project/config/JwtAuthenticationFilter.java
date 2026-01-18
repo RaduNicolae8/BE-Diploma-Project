@@ -1,5 +1,7 @@
 package com.diploma.project.config;
 
+import com.diploma.project.auth.AuthRemoteService;
+import com.diploma.project.dto.MarketplaceUserDTO;
 import com.diploma.project.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,6 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final String JWT_COOKIE = "jwtCookie";
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
+    private final AuthRemoteService authRemoteService;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
@@ -54,16 +57,39 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         Cookie cookie = optionalCookie.get();
         jwt = cookie.getValue();
-        username = jwtService.extractUsername(jwt);
+        //username = jwtService.extractUsername(jwt);
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails user = this.userDetailsService.loadUserByUsername(username);
-            if (jwtService.isTokenValid(jwt, user)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
+        MarketplaceUserDTO user;
+
+        try {
+            user = authRemoteService.getUserFromCookie(jwt);
+        } catch (Exception e) {
+            // Invalid / expired token or Auth service unavailable
+            filterChain.doFilter(request, response);
+            return;
         }
+
+        if (user == null ||
+                user.getEmail() == null ||
+                SecurityContextHolder.getContext().getAuthentication() != null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+
+        UsernamePasswordAuthenticationToken authToken =
+                new UsernamePasswordAuthenticationToken(
+                        user,                     // principal
+                        null,                     // credentials (not needed)
+                        user.getAuthorities()     // roles/authorities
+                );
+
+        authToken.setDetails(
+                new WebAuthenticationDetailsSource().buildDetails(request)
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authToken);
+
         filterChain.doFilter(request, response);
     }
 }
