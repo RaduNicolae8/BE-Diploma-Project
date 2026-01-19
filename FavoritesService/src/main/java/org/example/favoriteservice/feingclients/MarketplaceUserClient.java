@@ -1,13 +1,24 @@
 package org.example.favoriteservice.feingclients;
 
+import lombok.AllArgsConstructor;
 import org.example.favoriteservice.dto.MarketplaceUserDTO;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
-@FeignClient(name = "user-service", url = "${user.service.url}")
-public interface MarketplaceUserClient {
 
-	@GetMapping("api/marketplace-user/{id}")
-	MarketplaceUserDTO findById(@PathVariable("id") Long id);
+@Service
+@AllArgsConstructor
+public class MarketplaceUserClient {
+
+	private final WebClient webClient;
+
+	private final String baseUrl = "http://localhost:8090/api/marketplace-user";
+
+	public MarketplaceUserDTO findById(Long userId) {
+		return webClient.get()
+				.uri(baseUrl + "/" + userId)
+				.retrieve()
+				.bodyToMono(MarketplaceUserDTO.class)
+				.block();
+	}
 }

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface StarredServiceRepository extends JpaRepository<StarredService, Long> {
 
-    List<StarredService> findAllByUserId(Long id);
+    List<StarredService> findAllByUserId(Long userId);
 
     Optional<StarredService> findByUserIdAndServiceId(Long userId, Long serviceId);
 
