@@ -75,8 +75,9 @@ public class StarredServiceService  {
         return mapper.toDTO(saved);
     }
 
-    public void deleteStarredService(Long userId, Long serviceId) {
-        repository.deleteByUserIdAndServiceId(userId, serviceId);
+    @Transactional
+    public void deleteStarredService(Long serviceId, Long userId) {
+        repository.deleteByUserIdAndServiceId(serviceId, userId);
     }
 
     public List<MarketplaceServiceDTO> findAllByUserId(Long userId){

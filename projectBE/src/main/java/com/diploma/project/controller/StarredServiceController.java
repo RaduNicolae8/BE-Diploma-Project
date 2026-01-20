@@ -37,11 +37,8 @@ public class StarredServiceController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<List<MarketplaceServiceDTO>> findAllById(@RequestParam Long userId){
-        List<MarketplaceServiceDTO> starredServiceDTOList = favoritesClient.findAllByUser(userId);
-        return ResponseEntity.ok(starredServiceDTOList);
+    @GetMapping
+    public ResponseEntity<List<MarketplaceServiceDTO>> findAllByUser(@RequestParam Long userId) {
+        return ResponseEntity.ok(favoritesClient.findAllByUser(userId));
     }
-
-
 }
