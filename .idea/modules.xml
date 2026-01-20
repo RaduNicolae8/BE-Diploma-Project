@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Diploma-Project.iml" filepath="$PROJECT_DIR$/.idea/Diploma-Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FavoritesService/FavoritesService.iml" filepath="$PROJECT_DIR$/FavoritesService/FavoritesService.iml" />
     </modules>
   </component>
 </project>

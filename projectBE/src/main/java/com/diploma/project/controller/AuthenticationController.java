@@ -50,8 +50,7 @@ public class AuthenticationController {
                 return ResponseEntity.ok(authRemoteService.getUserFromCookie(token));
             }
 
-            return ResponseEntity.notFound().build();
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
 }
