@@ -29,8 +29,8 @@ public class FavoritesServiceClient {
 
 	public StarredServiceDTO save(HeartRequest heartRequest) {
 		return webClient.post()
-				.uri("/api/starred-service/save")  // doar path, baseUrl deja setat în WebClient
-				.bodyValue(heartRequest)           // trimite body-ul ca JSON
+				.uri("/api/starred-service/save")
+				.bodyValue(heartRequest)
 				.retrieve()
 				.bodyToMono(StarredServiceDTO.class)
 				.block();
